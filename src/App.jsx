@@ -6,7 +6,7 @@ import './App.css'
 function App() {
   const [data, setData] = useState(getData());
   const [value, setValue] = useState('');
-  const [toggleBtn, setToggleBtn] = useState(false);
+  const [toggleBtn, setToggleBtn] = useState(true);
   const [editToggle, setEditToggle] = useState(null);
 
   const addData = () => {
@@ -15,9 +15,9 @@ function App() {
       setData([...data, allData]);
       setValue("");
     }    
-    else if(value && !toggleBtn){
+    if(value && !toggleBtn){
         setData(
-          items.map((lists)=>{
+          data.map((lists)=>{
             if(lists.id === editToggle){
               return { ...lists, name:value} 
             }
@@ -42,7 +42,7 @@ function App() {
    return list.id === id;
   })
   console.log(editListItem)
-  setToggleBtn(true)
+  setToggleBtn(false)
   setValue(editListItem.name)
   setEditToggle(id)
     }
@@ -60,17 +60,17 @@ function App() {
   },[data])
 
   return (
-    <main className='border-2 border-red-500 w-[30rem] aspect-[1.2/1] fixed inset-0 m-auto p-2 flex gap-2 flex-col'>
-      <div className='border-2 border-black w-full flex justify-between px-3 rounded-md'>
+    <main className=' w-[30rem] aspect-[1.2/1] fixed inset-0 m-auto p-2 flex gap-2 flex-col rounded-md bg-white shadow-[0_0_5px_#fff]'>
+      <div className='border-2 border-slate-600 w-full flex justify-between px-3 rounded-md'>
         <input type="text" className='outline-none m-2 border-2 rounded-md w-[60%] px-1' value={value} onChange={(e) => setValue(e.target.value)} />
         {
           toggleBtn ? 
-          <button className='text-white border-2 border-black bg-black my-2 text-sm px-4 py-1 rounded-md font-medium transition-all duration-300 hover:bg-transparent hover:text-black active:font-semibold active:scale-[1.05]' onClick={editData}>Edit</button>
+          <button className='text-white border-2 border-black bg-black my-2 text-sm px-4 py-1 rounded-md font-medium transition-all duration-300 hover:bg-transparent hover:text-black active:font-semibold active:scale-[1.05]' onClick={addData}>ADD</button>
           :
-        <button className='text-white border-2 border-black bg-black my-2 text-sm px-4 py-1 rounded-md font-medium transition-all duration-300 hover:bg-transparent hover:text-black active:font-semibold active:scale-[1.05]' onClick={addData}>ADD</button>
+          <button className='text-white border-2 border-black bg-black my-2 text-sm px-4 py-1 rounded-md font-medium transition-all duration-300 hover:bg-transparent hover:text-black active:font-semibold active:scale-[1.05]' onClick={addData}>Edit</button>
       }
       </div>
-      <section className='border-2 w-full h-full m-auto rounded-md p-2 flex flex-col gap-2'>
+      <section className='border-2 border-slate-600 w-full h-full m-auto rounded-md p-2 flex flex-col gap-2'>
         {
           data.map((lists) => {
             return (
