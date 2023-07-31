@@ -21,7 +21,7 @@ function App() {
   const [toggleBtn, setToggleBtn] = useState(true);
   const [editToggle, setEditToggle] = useState(null);
 
-  const addData = () => {
+  const addData = () => { //add lists
     if(value.length>0){
       const allData = { id: new Date().getTime().toString(), name:value}
       setData([...data, allData]);
@@ -41,7 +41,7 @@ function App() {
         setEditToggle(null);
     }
   }
-  const deleteData = (id) => {
+  const deleteData = (id) => { //deleteLists
     setData(
       data.filter((lists) => {
         return id !== lists.id;
@@ -50,7 +50,7 @@ function App() {
   }
 
   const editData=(id)=>{
-  let editListItem = data.find((list)=>{
+  let editListItem = data.find((list)=>{ //editlists
    return list.id === id;
   })
   console.log(editListItem)
@@ -59,16 +59,16 @@ function App() {
   setEditToggle(id)
     }
 
-  const removeAll=()=>{
+  const removeAll=()=>{ //removeAll Lists
     setData([])
   }
 
- function getData(){
+ function getData(){ //getData from localstorage
     return localStorage.getItem('listsItems') ? JSON.parse(localStorage.getItem('listsItems')) : []
   }
 
   useEffect(()=>{
-   localStorage.setItem('listsItems',JSON.stringify(data))
+   localStorage.setItem('listsItems',JSON.stringify(data)) //setItem to localStorage
   },[data])
 
   return (
